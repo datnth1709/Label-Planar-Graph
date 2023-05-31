@@ -120,6 +120,7 @@ class MainWindow(QMainWindow):
         print(cfg.window_size[0],cfg.window_size[1])
         self.scroll_area.setMinimumSize(cfg.window_size[0] -480,cfg.window_size[1] -200)
         self.scroll_area.setMaximumHeight(cfg.window_size[1] -200)
+        self.scroll_area.setWidgetResizable(True)
         self.imageLayout.addWidget(self.scroll_area, Qt.AlignCenter)
 
     
@@ -162,8 +163,6 @@ class MainWindow(QMainWindow):
         self.menu_Prev.setShortcut(cfg.menu_Prev_shortcut)
         self.menu_Create.setShortcut(cfg.menu_Create_shortcut)
         self.menu_Delete.setShortcut(cfg.menu_Delete_shortcut)
-        self.button_ZoomIn.setShortcut(cfg.zoomIn_shortcut)
-        self.button_ZoomOut.setShortcut(cfg.zoomIn_shortcut)
 
         self.list_Line.clicked.connect(self.ListLine_Callback)
         self.list_File.clicked.connect(self.ListFile_Callback)
@@ -173,11 +172,27 @@ class MainWindow(QMainWindow):
         self.label_Image.mouseMoveEvent = self.mouseMove_Callback
         self.label_Image.setMouseTracking(True)
         self.label_Image.mouseDoubleClickEvent = self.mouseDoubleClick_Callback
+        self.label_Image.wheelEvent = self.scroll_event
 
         self.reset()
         self.button_OpenDir.setEnabled(True)
         self.menu_OpenDir.setEnabled(True)
-
+    
+    def scroll_event(self, event):
+        # Bắt sự kiện cuộn chuột
+        modifiers = QApplication.keyboardModifiers()
+        if modifiers == Qt.ControlModifier:
+            # Nếu nhấn phím Control cùng lúc, thực hiện zoom in và zoom out
+            angleDelta = event.angleDelta().y()
+            if angleDelta > 0:
+                # Zoom in
+                self.ZoomIn_Callback()
+            else:
+                # Zoom out
+                self.ZoomOut_Callback()
+        else:
+            # Nếu không nhấn phím Control, cho phép cuộn chuột thông thường
+            super().wheelEvent(event)
     def reset(self):
         self.list_Line.setEnabled(False)
         self.list_File.setEnabled(False)
