@@ -101,6 +101,9 @@ class MainWindow(QMainWindow):
     def InitUI(self, cfg):
         # Set UI
         self.buttonLayout.addWidget(self.button_OpenDir)
+        self.buttonLayout.addWidget(self.text_zoom)
+        self.buttonLayout.addWidget(self.button_ZoomIn)
+        self.buttonLayout.addWidget(self.button_ZoomOut)
         self.buttonLayout.addWidget(self.button_Save)
         self.buttonLayout.addWidget(QFrame(frameShape=QFrame.HLine))
         self.buttonLayout.addWidget(self.button_Next)
@@ -108,9 +111,6 @@ class MainWindow(QMainWindow):
         self.buttonLayout.addWidget(self.button_Create)
         self.buttonLayout.addWidget(self.button_Delete)
         self.buttonLayout.addWidget(QFrame(frameShape=QFrame.HLine))
-        self.buttonLayout.addWidget(self.text_zoom)
-        self.buttonLayout.addWidget(self.button_ZoomIn)
-        self.buttonLayout.addWidget(self.button_ZoomOut)
         self.imageLayout.addWidget(self.label_Image, Qt.AlignCenter)
         self.listLayout.addWidget(self.text_Line)
         self.listLayout.addWidget(self.list_Line)
