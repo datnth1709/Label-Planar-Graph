@@ -19,9 +19,11 @@ default_image_size: [1024, 1024]
 
 # Shortcuts
 menu_OpenDir_shortcut: 'Ctrl+O'
-menu_Save_shortcut: 'S'
-menu_Next_shortcut: 'D'
-menu_Prev_shortcut: 'A'
-menu_Create_shortcut: 'W'
-menu_Delete_shortcut: 'Delete'
+menu_Save_shortcut: 'Ctrl+S'
+menu_Next_shortcut: 'A'
+menu_Prev_shortcut: 'D'
+menu_Create_shortcut: 'Ctrl+C'
+menu_Delete_shortcut: 'Ctrl+X'
 menu_Tutorial_shortcut: 'Ctrl+U'
+zoomIn_shortcut: "I"
+zoomOut_shortcut: "O"

@@ -95,15 +95,13 @@ class MainWindow(QMainWindow):
 
         self.layout = QHBoxLayout()
         self.centralWidget = QWidget()
+        self.scroll_area = QScrollArea()
 
         self.InitUI(cfg)
 
     def InitUI(self, cfg):
         # Set UI
         self.buttonLayout.addWidget(self.button_OpenDir)
-        self.buttonLayout.addWidget(self.text_zoom)
-        self.buttonLayout.addWidget(self.button_ZoomIn)
-        self.buttonLayout.addWidget(self.button_ZoomOut)
         self.buttonLayout.addWidget(self.button_Save)
         self.buttonLayout.addWidget(QFrame(frameShape=QFrame.HLine))
         self.buttonLayout.addWidget(self.button_Next)
@@ -111,7 +109,20 @@ class MainWindow(QMainWindow):
         self.buttonLayout.addWidget(self.button_Create)
         self.buttonLayout.addWidget(self.button_Delete)
         self.buttonLayout.addWidget(QFrame(frameShape=QFrame.HLine))
-        self.imageLayout.addWidget(self.label_Image, Qt.AlignCenter)
+        self.buttonLayout.addWidget(self.text_zoom)
+        self.buttonLayout.addWidget(self.button_ZoomIn)
+        self.buttonLayout.addWidget(self.button_ZoomOut)
+
+        # Tạo một QScrollArea và đặt QLabel làm widget con
+        self.label_Image.setAlignment(Qt.AlignCenter)
+        self.scroll_area.setWidget(self.label_Image)
+        self.scroll_area.setWidgetResizable(True)
+        print(cfg.window_size[0],cfg.window_size[1])
+        self.scroll_area.setMinimumSize(cfg.window_size[0] -480,cfg.window_size[1] -200)
+        self.scroll_area.setMaximumHeight(cfg.window_size[1] -200)
+        self.imageLayout.addWidget(self.scroll_area, Qt.AlignCenter)
+
+    
         self.listLayout.addWidget(self.text_Line)
         self.listLayout.addWidget(self.list_Line)
         self.listLayout.addWidget(self.text_File)
@@ -151,7 +162,8 @@ class MainWindow(QMainWindow):
         self.menu_Prev.setShortcut(cfg.menu_Prev_shortcut)
         self.menu_Create.setShortcut(cfg.menu_Create_shortcut)
         self.menu_Delete.setShortcut(cfg.menu_Delete_shortcut)
-        self.menu_Tutorial.setShortcut(cfg.menu_Tutorial_shortcut)
+        self.button_ZoomIn.setShortcut(cfg.zoomIn_shortcut)
+        self.button_ZoomOut.setShortcut(cfg.zoomIn_shortcut)
 
         self.list_Line.clicked.connect(self.ListLine_Callback)
         self.list_File.clicked.connect(self.ListFile_Callback)
