@@ -174,9 +174,17 @@ class MainWindow(QMainWindow):
         self.label_Image.mouseDoubleClickEvent = self.mouseDoubleClick_Callback
         self.label_Image.wheelEvent = self.scroll_event
 
+        # Khởi tạo và cấu hình QTimer
+        self.timer = QTimer()
+        self.timer.setInterval(10000)  # 10 giây
+        self.timer.timeout.connect(self.Save_Callback)
+        # Bắt đầu timer
+        self.timer.start()
+
         self.reset()
         self.button_OpenDir.setEnabled(True)
         self.menu_OpenDir.setEnabled(True)
+        
     
     def scroll_event(self, event):
         # Bắt sự kiện cuộn chuột
